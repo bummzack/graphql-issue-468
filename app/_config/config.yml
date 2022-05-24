@@ -1,0 +1,25 @@
+---
+Name: app-config
+---
+SilverStripe\Core\Manifest\ModuleManifest:
+  project: app
+
+SilverStripe\i18n\i18n:
+  default_locale: de_CH
+
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Assets\Image_Backend:
+    properties:
+      Quality: 75
+
+SilverStripe\Assets\InterventionBackend:
+  flush_enabled: false
+---
+Only:
+  classexists: 'Imagick'
+---
+# Use Imagick Image backend
+SilverStripe\Core\Injector\Injector:
+  Intervention\Image\ImageManager:
+    constructor:
+      - { driver: imagick }

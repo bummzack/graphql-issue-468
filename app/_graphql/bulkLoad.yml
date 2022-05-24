@@ -1,0 +1,11 @@
+# Disabled as this breaks polymorphism: https://github.com/silverstripe/silverstripe-graphql/issues/468
+
+MyExtension:
+  load:
+    extensionLoader:
+      include:
+        - Mutoco\Extension\MyExtension
+  apply:
+    fields:
+      version: true
+

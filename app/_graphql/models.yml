@@ -1,0 +1,24 @@
+# -------------------------------------------------------------
+# Pages
+# -------------------------------------------------------------
+
+Page:
+  fields:
+    id: true
+    title: true
+    link: true
+    menuTitle: true
+    urlSegment: true
+    parentId: true
+    showInMenus: true
+    metaDescription: true
+  operations:
+    read: true
+    readOne:
+      plugins:
+        getByLink:
+          after: filter
+
+Mutoco\Page\CustomPage:
+  fields:
+    customField: true

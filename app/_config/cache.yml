@@ -1,0 +1,14 @@
+---
+Name: mysite-cache
+After:
+  - '#assetscache'
+---
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.InterventionBackend_Manipulations:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "Intervention_Manipulations"
+      defaultLifetime: 0
+
+SilverStripe\View\SSViewer:
+  global_key: '$CurrentReadingMode, $Locale'

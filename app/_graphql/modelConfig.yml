@@ -1,0 +1,11 @@
+config:
+  modelConfig:
+    DataObject:
+      operations:
+        read:
+          plugins:
+            sort: true
+        readOne:
+          plugins:
+            getByLink:
+              after: filter

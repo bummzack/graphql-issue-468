@@ -1,0 +1,11 @@
+---
+Name: app-extensions
+After:
+  - '#versionedstate'
+---
+
+# Adding this will disable the page polymorphism
+Mutoco\Page\CustomPage:
+  extensions:
+    - Mutoco\Extension\MyExtension
+

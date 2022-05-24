@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  silverstripe:
+    container_name: ${PROJECT_NAME}_ss
+    build:
+      context: .
+      dockerfile: ./.docker-config/silverstripe/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - ./.docker-config/developer.ini:/usr/local/etc/php/conf.d/zzz-developer.ini
+    depends_on:
+      - database
+      - mailhog
+    environment:
+      - DOCUMENT_ROOT=/var/www/html/public
+      - SS_TRUSTED_PROXY_IPS=*
+      - SS_ENVIRONMENT_TYPE=dev
+      - SS_DATABASE_SERVER=database
+      - SS_DATABASE_NAME=${SS_DATABASE_NAME}
+      - SS_DATABASE_USERNAME=${SS_DATABASE_USERNAME}
+      - SS_DATABASE_PASSWORD=${SS_DATABASE_PASSWORD}
+      - SS_DEFAULT_ADMIN_USERNAME=admin
+      - SS_DEFAULT_ADMIN_PASSWORD=password
+      - SSH_AUTH_SOCK=/ssh-agent
+    ports:
+      - "8000:80"
+      - "9003"
+  database:
+    container_name: ${PROJECT_NAME}_db
+    image: mariadb
+    ports:
+      - "3336:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SS_DATABASE_PASSWORD}
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./dumps:/var/data
+  mailhog:
+    container_name: ${PROJECT_NAME}_mailhog
+    image: ajoergensen/mailhog
+    ports:
+      - "1025:1025" # smtp server
+      - "8025:8025" # web ui
+volumes:
+  db-data:

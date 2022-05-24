@@ -1,0 +1,21 @@
+---
+Name: dev-mailer
+After:
+  - '#emailconfig'
+---
+
+SilverStripe\Core\Injector\Injector:
+  Swift_Transport:
+    class: Swift_SendmailTransport
+
+---
+Only:
+  environment: 'dev'
+---
+
+SilverStripe\Core\Injector\Injector:
+  Swift_Transport:
+    class: Swift_SmtpTransport
+    properties:
+      Host: mailhog
+      Port: 1025
