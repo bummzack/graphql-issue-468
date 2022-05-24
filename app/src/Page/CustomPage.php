@@ -36,6 +36,7 @@ class CustomPage extends \Page
                 $customPage->Title = 'My Custom Page';
                 $customPage->Content = '<p>My custom content</p>';
                 $customPage->URLSegment = 'custom-page';
+                $customPage->CustomField = 'custom field content';
                 $customPage->Sort = 1;
                 $customPage->write();
                 $customPage->copyVersionToStage(Versioned::DRAFT, Versioned::LIVE);

@@ -9,5 +9,7 @@ class MyExtension extends DataExtension
         'Version' => 'Int'
     ];
 
-
+    private static $defaults = [
+        'Version' => 10
+    ];
 }
